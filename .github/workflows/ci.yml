@@ -88,11 +88,9 @@ jobs:
           brew update && brew install filosottile/musl-cross/musl-cross llvm
           echo $(brew --prefix llvm)/bin >> $GITHUB_PATH
 
-      - run: cargo install bpf-linker --git https://github.com/aya-rs/bpf-linker.git --no-default-features --features llvm-21
-        if: runner.os == 'macos'
-
-      - run: cargo install bpf-linker --git https://github.com/aya-rs/bpf-linker.git
-        if: runner.os == 'Linux'
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: bpf-linker
 
       - run: sudo apt update && sudo apt install expect
         if: runner.os == 'Linux'
